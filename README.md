@@ -1,4 +1,4 @@
-# Mô hình setup Wordpress web server + H
+# Mô hình setup Wordpress web server + HA
 
 
 **Số lượng server** : 4
