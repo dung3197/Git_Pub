@@ -21,7 +21,7 @@ db: 103.107.182.182
 
 **Webserver được cấu hình sử dùng 3 file:**
 * `wp-config.php` cấu hình Wordpress
-* `000-defualt.conf` cấu hình virtual host 
+* `000-defalt.conf` cấu hình virtual host 
 * `web.yaml` playbook của Web Servers
          
 **Database được cấu hình bởi:**
