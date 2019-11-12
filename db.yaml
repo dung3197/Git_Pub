@@ -1,0 +1,56 @@
+---
+- hosts: db
+  tasks:
+  - name: Install the Python MySQL Module
+    apt:
+     name: python-mysqldb
+     state: installed
+  - name: Update Repository
+    apt: 
+     update_cache: yes
+    become: yes
+  - name: Install MySQL 
+    apt: 
+     name: mysql-server
+     state: installed
+  - name: Start MySQL Service
+    service:
+     name: mysql
+     state: started
+     enabled: yes
+  - name: Allow remote access on MySQL server
+    shell: sed -i 's/127.0.0.1/103.107.182.182/g' /etc/mysql/mysql.conf.d/mysqld.cnf
+    notify: restart mysql
+  - name: Create local databases user
+    mysql_user:
+      name: dungnt
+      password: abc
+      priv: '*.*:ALL'
+      state: present
+  - name: Create database user with name 'dungnt' and password 'abc' with all database privileges for web 1
+    mysql_user:
+      name: dungnt
+      password: abc
+      host: 103.107.182.45
+      priv: '*.*:ALL'
+      state: present
+  - name: Create database user with name 'dungnt' and password 'abc' with all database privileges for web 1
+    mysql_user:
+      name: dungnt
+      password: abc
+      host: 103.107.182.199
+      priv: '*.*:ALL'
+      state: present
+  - name: Create a MySQL database
+    mysql_db:
+       name: wordpress_db
+       state: present
+       login_user: dungnt
+       login_password: abc
+    become: yes
+    notify: restart mysql     
+  handlers:
+  - name: restart mysql
+    service:
+      name: mysql
+      state: restarted

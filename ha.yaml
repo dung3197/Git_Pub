@@ -1,0 +1,32 @@
+---
+ - hosts: ha
+   tasks:
+   - name: Update Repository
+     apt:
+      update_cache: yes
+     become: yes
+   - name: Install HAProxy
+     apt:
+       name: haproxy
+       state: installed
+   - name: Add web server 1 entry in /etc/hosts 
+     become: yes
+     become_user: root
+     shell: echo "103.107.182.45 dungnt.com" >> /etc/hosts
+   - name: Add web server 2 entry in /etc/hosts 
+     become: yes
+     become_user: root
+     shell: echo "103.107.182.199 dungnt.com" >> /etc/hosts
+   - name: Copy an edited default configuration of HAProxy and backup it
+     template:
+      src: /etc/ansible/haproxy.cfg
+      dest: /etc/haproxy/haproxy.cfg
+      mode: 0644
+      backup: yes
+     notify: restart haproxy
+   handlers:
+    - name: Start haproxy
+      service:
+        name: haproxy
+        state: started
+        enabled: yes
