@@ -15,13 +15,14 @@ ha: 103.107.182.185
 
 db: 103.107.182.182
 
-** HAProxy được cấu hình bởi: **
+**HAProxy được cấu hình bởi:**
 * `haproxy.cfg` cấu hình trên HAProxy LB
 * `ha.yaml` playbook của HAProxy
-** Webserver được cấu hình sử dùng 3 file: **
+
+**Webserver được cấu hình sử dùng 3 file:**
 * `wp-config.php` cấu hình Wordpress
 * `000-defualt.conf` cấu hình virtual host 
 * `web.yaml` playbook của Web Servers
          
-** Database được cấu hình bởi: **
+**Database được cấu hình bởi:**
 * `db.yaml` playbook của Database Server
