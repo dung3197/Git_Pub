@@ -1,0 +1,22 @@
+server {
+        listen 8080;
+        listen [::]:8080;
+        root /var/www/dungnt97;
+        index index.php index.html index.htm index.nginx-debian.html;
+        server_name dungnt97.tk www.dungnt97.tk;
+
+        location / {
+                try_files $uri $uri/ =404;
+                proxy_pass http://139.162.35.151:8080;
+                proxy_set_header Host $host;
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header X-Forwarded-Proto $scheme;
+        }
+
+        location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/var/run/php/php7.2-fpm.sock;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    }
+}
