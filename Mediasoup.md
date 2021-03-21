@@ -30,5 +30,5 @@
 <h3>II.Comunication:</h3>
 &nbsp&nbsp&nbsp&nbsp&nbsp&nbspMediasoup does not provide any signaling protocol to communicate clients and server. It's up to the application communicate them by using WebSocket, HTTP or whichever communication means, and exchange mediasoup related parameters, requests/responses and notifications between clients and server. In most scenarios this communication must be bidirectional so a full-duplex channel is usually required. However the application can reuse the same channel for non mediasoup related message exchange (such as authentication procedures, chat messages, file transfer and whatever the application wishes to implement).
 <h3>III.Architecture:</h3>
-<center>![](/Pics/mediasoup_architecture.png "Architecture")</center>
+<center>![](master/Pics/mediasoup_architecture.png "Architecture")</center>
 <h3>IV.Scaling:</h3>
